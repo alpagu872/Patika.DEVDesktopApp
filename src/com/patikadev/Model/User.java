@@ -121,6 +121,29 @@ public class User {
         return true;
     }
 
+    public static boolean addStudent(String name, String uname, String pass) {
+        String query = "INSERT INTO user (name,uname,pass,type) VALUES (?,?,?,'student')";
+        User findUser = User.getFetch(uname);
+        if (findUser != null) {
+            Helper.showMessage("fill");
+            return false;
+        }
+        try {
+            PreparedStatement pr = DBHelper.getInstance().prepareStatement(query);
+            pr.setString(1, name);
+            pr.setString(2, uname);
+            pr.setString(3, pass);
+            int response = pr.executeUpdate();
+
+            if (response == -1) {
+                Helper.showMessage("error");
+            }
+            return response != -1;
+        } catch (SQLException e) {
+            System.out.println(e);;
+        }
+        return true;
+    }
     public static User getFetch(String uname){
         User obj=null;
         String query="SELECT * FROM user WHERE uname =?";

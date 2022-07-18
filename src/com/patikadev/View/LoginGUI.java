@@ -51,6 +51,9 @@ public class LoginGUI extends JFrame{
             }
         });
         kayıtOLButton.addActionListener(e -> {
+            this.setVisible(false);
+            RegisterGUI registerGUI = new RegisterGUI();
+            registerGUI.setVisible(true);
 
         });
     }
